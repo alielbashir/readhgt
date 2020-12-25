@@ -2,8 +2,26 @@
 // Created by ali on 12/25/20.
 //
 #include "readhgt.h"
-std::vector<std::vector<PIXEL>> readhgt(std::string path) {
+#include <fstream>
+#include <iostream>
 
+std::vector<std::vector<PIXEL>> readhgt(const std::string &path) {
+    std::ifstream input(path, std::ios::binary | std::ios::in); // construct file object as binary
+    int n = 1201; // 3-second arc photo size
+    std::vector<std::vector<PIXEL>> arr(n, std::vector<PIXEL>(n));
+    PIXEL pixel;
+    if (!input.is_open()) {
+        std::cout << "error opening file\n";
+        exit(1);
+    }
+    input.seekg(1);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            input.read((char *) &pixel, 2);
+            arr[i][j] = pixel;
+        }
+    }
+    return arr;
 }
 
 

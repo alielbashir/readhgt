@@ -85,5 +85,5 @@ typedef struct
         RGBTRIPLE;
 
 void hgttobmp(std::vector<std::vector<PIXEL>> hgt);
-std::vector<std::vector<PIXEL>> readhgt(std::string path);
+std::vector<std::vector<PIXEL>> readhgt(const std::string& path);
 #endif //READHGT_READHGT_H
