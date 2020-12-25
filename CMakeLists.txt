@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(readhgt)
-
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 set(CMAKE_CXX_STANDARD 14)
 SET(OpenCV_DIR /home/ali/installation/OpenCV-master/lib/cmake/opencv4)
 add_executable(readhgt main.cpp readhgt.cpp readhgt.h)
+target_link_libraries( readhgt ${OpenCV_LIBS} )

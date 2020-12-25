@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <array>
 #include <cstdint>
 #include <string>
 
@@ -21,9 +22,9 @@
  * Adapted from http://msdn.microsoft.com/en-us/library/cc230309.aspx.
  * See http://en.wikipedia.org/wiki/Stdint.h for more on stdint.h.
  */
-typedef uint8_t  BYTE;
+typedef uint8_t BYTE;
 typedef uint32_t DWORD;
-typedef int32_t  LONG;
+typedef int32_t LONG;
 typedef uint16_t PIXEL;
 
 /**
@@ -34,13 +35,12 @@ typedef uint16_t PIXEL;
  *
  * Adapted from http://msdn.microsoft.com/en-us/library/dd183374(VS.85).aspx.
  */
-typedef struct
-{
-    PIXEL   bfType;
-    DWORD  bfSize;
-    PIXEL   bfReserved1;
-    PIXEL   bfReserved2;
-    DWORD  bfOffBits;
+typedef struct {
+    PIXEL bfType;
+    DWORD bfSize;
+    PIXEL bfReserved1;
+    PIXEL bfReserved2;
+    DWORD bfOffBits;
 } __attribute__((__packed__))
         BITMAPFILEHEADER;
 
@@ -52,19 +52,18 @@ typedef struct
  *
  * Adapted from http://msdn.microsoft.com/en-us/library/dd183376(VS.85).aspx.
  */
-typedef struct
-{
-    DWORD  biSize;
-    LONG   biWidth;
-    LONG   biHeight;
-    PIXEL   biPlanes;
-    PIXEL   biBitCount;
-    DWORD  biCompression;
-    DWORD  biSizeImage;
-    LONG   biXPelsPerMeter;
-    LONG   biYPelsPerMeter;
-    DWORD  biClrUsed;
-    DWORD  biClrImportant;
+typedef struct {
+    DWORD biSize;
+    LONG biWidth;
+    LONG biHeight;
+    PIXEL biPlanes;
+    PIXEL biBitCount;
+    DWORD biCompression;
+    DWORD biSizeImage;
+    LONG biXPelsPerMeter;
+    LONG biYPelsPerMeter;
+    DWORD biClrUsed;
+    DWORD biClrImportant;
 } __attribute__((__packed__))
         BITMAPINFOHEADER;
 
@@ -76,14 +75,26 @@ typedef struct
  *
  * Adapted from http://msdn.microsoft.com/en-us/library/aa922590.aspx.
  */
-typedef struct
-{
-    BYTE  rgbtBlue;
-    BYTE  rgbtGreen;
-    BYTE  rgbtRed;
+typedef struct {
+    BYTE rgbtBlue;
+    BYTE rgbtGreen;
+    BYTE rgbtRed;
 } __attribute__((__packed__))
         RGBTRIPLE;
 
-void hgttobmp(std::vector<std::vector<PIXEL>> hgt);
-std::vector<std::vector<PIXEL>> readhgt(const std::string& path);
+class HGT {
+public:
+    int size;
+    std::vector<std::vector<PIXEL>> arr;
+    HGT(int size) {
+        this->size = size;
+        this->arr.resize(size);
+        for (int i = 0; i < size; i++) {
+            this->arr.at(i).resize(size);
+        }
+    }
+};
+
+HGT readhgt(const std::string &path);
+
 #endif //READHGT_READHGT_H

@@ -5,9 +5,10 @@
 #include <fstream>
 #include <iostream>
 
-std::vector<std::vector<PIXEL>> readhgt(const std::string &path) {
+HGT readhgt(const std::string &path) {
     std::ifstream input(path, std::ios::binary | std::ios::in); // construct file object as binary
     int n = 1201; // 3-second arc photo size
+    HGT hgt(n);
     std::vector<std::vector<PIXEL>> arr(n, std::vector<PIXEL>(n));
     PIXEL pixel;
     if (!input.is_open()) {
@@ -21,7 +22,8 @@ std::vector<std::vector<PIXEL>> readhgt(const std::string &path) {
             arr[i][j] = pixel;
         }
     }
-    return arr;
+    hgt.arr = arr;
+    return hgt;
 }
 
 
