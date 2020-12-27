@@ -85,6 +85,8 @@ typedef struct {
 class HGT {
 public:
     int size;
+    PIXEL min;
+    PIXEL max;
     std::vector<std::vector<PIXEL>> arr;
     HGT(int size) {
         this->size = size;
@@ -94,7 +96,7 @@ public:
         }
     }
 };
-
 HGT readhgt(const std::string &path);
+void convert(HGT src, const int range[2]);
 
 #endif //READHGT_READHGT_H
