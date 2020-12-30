@@ -4,7 +4,7 @@
 #include "readhgt.h"
 using namespace cv;
 int main() {
-    std::string root = "files/";
+    std::string root = "";
     std::cout << "Enter the coordinates: ";
     std::string coords;
     std::cin >> coords;
@@ -18,7 +18,7 @@ int main() {
         }
     }
 
-    cv::Size newSize(600, 600);
+    cv::Size newSize(700, 700);
     cv::resize(mat2, mat2, newSize);
     cv::normalize(mat2, mat2, 0, 65535, cv::NORM_MINMAX);
     imshow("hgt", mat2);
