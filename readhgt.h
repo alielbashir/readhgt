@@ -97,6 +97,6 @@ public:
     }
 };
 HGT readhgt(const std::string &path);
-void convert(HGT src, const int range[2]);
+HGT convert(HGT src, const int range[2]);
 
 #endif //READHGT_READHGT_H
